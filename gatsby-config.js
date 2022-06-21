@@ -2,9 +2,9 @@ require('dotenv').config()
 
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Agency Portfolio`,
-    description: `A portfolio for your creative shop`,
-    author: `@JacobKnaack`,
+    title: `Thou Art`,
+    description: `A teach-learning embodiment environment`,
+    author: `@thouart`,
   },
   plugins: [
     `gatsby-plugin-eslint`,
@@ -13,9 +13,9 @@ module.exports = {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: `gatsby-agency-portfolio`,
-        short_name: `GAP`,
+        short_name: `thouart`,
         start_url: `/`,
-        icon: `src/images/gap_logo.svg`,
+        icon: `src/images/Thou-Art-Logo-V1.1.png`,
       },
     },
     {

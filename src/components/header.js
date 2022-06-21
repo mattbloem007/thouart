@@ -41,7 +41,6 @@ class Header extends React.Component {
         position: 'fixed',
         width: '100%',
         zIndex: 100,
-        background: 'none',
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -62,44 +61,43 @@ class Header extends React.Component {
         textDecoration: `none`,
       },
       logo: {
-        width: '50px',
+        width: '30%',
         padding: '10px',
         margin: '0',
       }
     }
     if (!this.state.scrollTop) {
-      styles.container.background = `#000000`
-      styles.container.color = `#ffffff`
-      styles.link.color = `#ffffff`
+      styles.container.background = `#ffffff`
+      styles.container.color = `#000000`
+      styles.link.color = `#000000`
       styles.link.textShadow = 'none'
     }
 
-    const { siteTitle, logo } = this.props
+    const { logo } = this.props
     return (
       <Navbar style={styles.container}>
         <Navbar.Header style={styles.navheader}>
-          {logo ? <img src={logo.url} style={styles.logo} /> : <h5>GAP</h5>}
           <h1>
             <Link to="/" style={styles.link}>
-              {siteTitle}
+              {logo ? <img src={logo.url} style={styles.logo} /> : <h5>GAP</h5>}
             </Link>
           </h1>
         </Navbar.Header>
         <Navbar.Body>
           <Nav>
-            <Nav.Item
+            {/**<Nav.Item
               className={this.state.activeKey.includes('work') ? 'active' : ''}
               componentClass={Link}
               to="/work"
             >
               Work
-            </Nav.Item>
+            </Nav.Item>*/}
             <Nav.Item
-              className={this.state.activeKey.includes('projects') ? 'active' : ''}
+              className={this.state.activeKey.includes('courses') ? 'active' : ''}
               componentClass={Link}
-              to="/projects"
+              to="/courses"
             >
-              Projects
+              Courses
             </Nav.Item>
             <Nav.Item
               className={this.state.activeKey.includes('about') ? 'active' : ''}

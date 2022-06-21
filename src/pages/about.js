@@ -1,8 +1,8 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { graphql } from "gatsby"
-import { Progress } from 'rsuite'
-const { Line } = Progress
+//import { Progress } from 'rsuite'
+//const { Line } = Progress
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -11,7 +11,7 @@ class About extends React.Component {
   render() {
     const pageData = this.props.data.cosmicjsPages.metadata
     const peopleData = this.props.data.allCosmicjsPeople.edges
-    const skillData = this.props.data.allCosmicjsSkills.edges
+  //  const skillData = this.props.data.allCosmicjsSkills.edges
     const siteData = this.props.data.cosmicjsSettings.metadata
     const contactData = this.props.data.cosmicjsContacts.metadata
     const connectData = this.props.data.allCosmicjsConnects.edges
@@ -60,7 +60,7 @@ class About extends React.Component {
         maxWidth: '300px',
       },
       person: {
-        width: '25%',
+        width: '50%',
         padding: '10px',
         display: 'flex',
         flexDirection: 'column',
@@ -76,6 +76,7 @@ class About extends React.Component {
       personTitle: {
         color: 'grey',
         fontSize: '0.8rem',
+        textAlign: 'center'
       }
     }
     if (pageData.splash_image) {
@@ -96,7 +97,7 @@ class About extends React.Component {
         <section className="page-container about">
           <header className="page-header about" style={styles.pageHeader}>
             <div className="header-filter">
-              <h3>Who We Are</h3>
+              <h3>Thou Art</h3>
               {pageData.splash_phrase
                 ? <p className="page-header-description">{pageData.splash_phrase}</p>
                 : null
@@ -107,8 +108,8 @@ class About extends React.Component {
             <h4 className="intro-summary" style={styles.summary}>{pageData.intro_summary}</h4>
             <p className="intro-description" style={styles.description}>{pageData.intro_description}</p>
           </section>
-          <section className="section-container short" style={styles.skills}>
-            {skillData.map(skill => (
+          {/**<section className="section-container short" style={styles.skills}>
+            skillData.map(skill => (
               <div key={skill.node.title}>
                 <div style={styles.skillDetails}>
                   <h4 style={styles.skillName}>{skill.node.title}</h4>
@@ -120,10 +121,10 @@ class About extends React.Component {
                   strokeColor="black"
                 />
               </div>
-            ))}
-          </section>
+            ))
+          </section>*/}
           <section className="section-container content medium">
-            <div className="wrapper-content people">
+            <div className="wrapper-content people" style={{alignItems: "flex-start"}}>
               {peopleData.map(person => (
                 <div key={person.node.title} style={styles.person}>
                   <div
@@ -137,7 +138,7 @@ class About extends React.Component {
                     }}
                   />
                   <h5 style={styles.personName}>{person.node.title}</h5>
-                  <h6 style={styles.personTitle}>{person.node.metadata.job_title}</h6>
+                  <div style={styles.personTitle} dangerouslySetInnerHTML={{__html: person.node.content}} />
                 </div>
               ))}
             </div>
@@ -164,6 +165,7 @@ export const query = graphql`
       edges {
         node {
           title
+          content
           metadata {
             image {
               url

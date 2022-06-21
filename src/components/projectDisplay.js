@@ -60,7 +60,7 @@ class ProjectDisplay extends React.Component {
 
     return (
       <Link
-        to={`/projects?${encodeURI(this.props.title)}`}
+        to={`/courses?${encodeURI(this.props.title)}`}
         style={styles.container}
         onMouseEnter={this.handleHover}
         onMouseLeave={this.handleUnHover}

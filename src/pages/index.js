@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { Link, graphql } from "gatsby"
-import { Animation, Icon, Input, Button, Message } from 'rsuite'
+import { Animation, Input, Button, Message } from 'rsuite'
 const { Fade, Collapse } = Animation
 
 import 'rsuite/dist/styles/rsuite.min.css'
@@ -56,7 +56,7 @@ class IndexPage extends React.Component {
     const contactData = this.props.data.cosmicjsContacts.metadata
     const connectData = this.props.data.allCosmicjsConnects.edges
     const peopleData = this.props.data.allCosmicjsPeople.edges
-    const serviceData = this.props.data.allCosmicjsServices.edges
+//    const serviceData = this.props.data.allCosmicjsServices.edges
     const projectData = this.props.data.allCosmicjsProjects.edges
     let headerBreakpoint
     if (typeof window !== 'undefined') {
@@ -123,7 +123,7 @@ class IndexPage extends React.Component {
         color: '#a9a9a9',
       },
       person: {
-        width: '25%',
+        width: '50%',
         padding: '10px',
         display: 'flex',
         flexDirection: 'column',
@@ -139,6 +139,7 @@ class IndexPage extends React.Component {
       personTitle: {
         color: 'grey',
         fontSize: '0.8rem',
+        textAlign: 'center'
       }
     }
     if (pageData.splash_image) {
@@ -172,17 +173,17 @@ class IndexPage extends React.Component {
           <Fade in={this.state.showWork}>
             <div className="section-wrapper">
               <div className="section-header" style={styles.header}>
-                <h2 className="section-title" style={styles.title}>What We Do</h2>
+                <h2 className="section-title" style={styles.title}>What Thou Art Offers</h2>
                 <p className="people-description" style={styles.description}>{pageData.service_description}</p>
               </div>
               <div className="wrapper-content services">
-                {serviceData.map(service => (
+                {/**serviceData.map(service => (
                   <Link to="/work" key={service.node.title} className="service-link" style={styles.service}>
                     <Icon size="3x" icon={service.node.metadata.icon} />
                     <h5 style={styles.serviceName}>{service.node.title}</h5>
                     <p style={styles.serviceDescription}>{service.node.metadata.summary}</p>
                   </Link>
-                ))}
+                ))*/}
               </div>
               <div className="wrapper-content projects">
                 {projectData.map(project => (
@@ -207,7 +208,7 @@ class IndexPage extends React.Component {
                 <h2 className="section-title" style={styles.title}>Who We Are</h2>
                 <p style={styles.description}>{pageData.people_description}</p>
               </div>
-              <div className="wrapper-content people">
+              <div className="wrapper-content people" style={{alignItems: "flex-start"}}>
                 {peopleData.map(person => {
                   return (
                     <Link key={person.node.title} to="/about" style={styles.person}>
@@ -222,7 +223,7 @@ class IndexPage extends React.Component {
                         }}
                       />
                       <h5 style={styles.personName}>{person.node.title}</h5>
-                      <h6 style={styles.personTitle}>{person.node.metadata.job_title}</h6>
+                      <div style={styles.personTitle} dangerouslySetInnerHTML={{__html: person.node.content}} />
                     </Link>
                   )
                 })}
@@ -335,6 +336,7 @@ query Index {
     edges {
       node {
         title
+        content
         metadata {
           image {
             url
@@ -376,7 +378,7 @@ query Index {
     edges {
       node {
         title
-        metadata { 
+        metadata {
           url
         }
       }

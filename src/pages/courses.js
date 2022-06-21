@@ -49,6 +49,11 @@ class Projects extends React.Component {
       modal: {
         top: '50px'
       },
+      description: {
+        width: '40%',
+        marginRight: '30px',
+        fontSize: '1.0rem'
+      },
       gallery: {
         marginTop: '15px',
         display: 'flex',
@@ -74,10 +79,13 @@ class Projects extends React.Component {
         <section className="page-container">
           <header className="page-header projects" style={styles.header}>
             <div className="header-filter">
-              <h3>Check Out Our Work</h3>
+              <h3>Courses</h3>
               <p className="page-header-description">{pageData.summary}</p>
             </div>
           </header>
+          <section className="section-container short row">
+            <p className="intro-description" style={styles.description}>{pageData.intro_description}</p>
+          </section>
           <div className="project-gallery">
             {projectData.map(project => {
               return (
@@ -101,7 +109,7 @@ class Projects extends React.Component {
             }
             {this.state.selectedProject.title
               ? <Modal.Body>
-                {this.state.selectedProject.metadata.description}
+                <div dangerouslySetInnerHTML={{__html: this.state.selectedProject.content}} />
                 <div className="modal-gallery" style={styles.gallery}>
                   {this.state.selectedProject.metadata.gallery.map(imageUrl => (
                     <img
@@ -129,18 +137,20 @@ class Projects extends React.Component {
 
 export const query = graphql`
   query Projects {
-    cosmicjsPages(slug: { eq: "projects" }) {
+    cosmicjsPages(slug: { eq: "courses" }) {
       metadata {
         splash_image {
           url
         }
         summary
+        intro_description
       }
     }
     allCosmicjsProjects {
       edges {
         node {
           title
+          content
           metadata {
             date
             gallery
